@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        const PRECISION = 5;
+        const PADDING = 20;
+        const ARROW_ANGLE = 30;
+        const DEFAULT_ARROW_LENGTH = 10;
+    </script>
+    <script src="./Vector.utils.js"></script>
+    <script src="./Utils.js"></script>
+    <script src="./Vector.js"></script>
+    <script src="./Vector.addition.graph.js"></script>
+    <script>
+        function draw() {
+            const vectors = [
+                new Vector(
+                    getValueOfElement('#magnitude'), 
+                    getValueOfElement('#direction')
+                ),
+                new Vector(
+                    getValueOfElement('#magnitude2'), 
+                    getValueOfElement('#direction2')
+                ),
+            ];
+            paintVectors(vectors);
+            buildVectorAdditionGraph(vectors, '#vectorAdditionGraph')
+           
+        }
+
+        window.onload = () => {
+            ['#direction', '#magnitude', '#direction2', '#magnitude2'].forEach((selector) => {
+                document.querySelector(selector).addEventListener('change', draw);
+            });
+        }
+        
+    </script>
+</head>
+<body>
+    <p>
+        Direction <input id="direction" type="number" min="0" max="360">
+    </p>
+    <p>
+        Magnitude <input id="magnitude" type="number" min="0" max="360">
+    </p>
+    <p>
+        Direction 2 <input id="direction2" type="number" min="0" max="360">
+    </p>
+    <p>
+        Magnitude 2 <input id="magnitude2" type="number" min="0" max="360">
+    </p>
+    <p>
+        <button onclick="draw()">Draw</button>
+    </p>
+    <div class="graphs-block">
+        <canvas id="vectorAdditionGraph"></canvas>
+    </div>
+</body>
+</html>
